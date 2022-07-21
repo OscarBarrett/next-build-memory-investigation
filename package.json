@@ -1,9 +1,17 @@
 {
   "private": true,
   "scripts": {
+    "createComponents": "node scripts/createComponents.js",
+    "createPageWithDirectImports": "node scripts/createPageWithDirectImports.js",
+    "createPageWithImportsFromBarrelFile": "node scripts/createPageWithImportsFromBarrelFile.js",
+    "createPageWithMixedImports": "node scripts/createPageWithMixedImports.js",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "testDirect": "rm -rf pages/test/*.jsx && rm -rf components/* && npm run createComponents &&  npm run createPageWithDirectImports && rm -rf .next && mprof run -C npm run build && mprof plot -o direct-imports.jpg",
+    "testBarrelFile": "rm -rf pages/test/*.jsx && rm -rf components/* && npm run createComponents && npm run createPageWithImportsFromBarrelFile && rm -rf .next && mprof run -C npm run build && mprof plot -o barrel-imports.jpg",
+    "testMixed": "rm -rf pages/test/*.jsx && rm -rf components/* && npm run createComponents && npm run createPageWithMixedImports && rm -rf .next && mprof run -C npm run build && mprof plot -o mixed-imports.jpg",
+    "testAll": "rm -rf pages/test/*.jsx && rm -rf components/* && npm run createComponents && npm run createPageWithDirectImports && npm run createPageWithImportsFromBarrelFile && npm run createPageWithMixedImports && rm -rf .next && mprof run -C npm run build && mprof plot -o all-imports.jpg"
   },
   "dependencies": {
     "next": "latest",
